@@ -3,6 +3,8 @@ package com.example.pokeapi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -16,6 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     val networkUtils:NetworkUtils = NetworkUtils()
     var pokemons:ArrayList<Pokemon> = ArrayList()
+
+    lateinit var gridLayoutManager:GridLayoutManager
+    lateinit var pokemonAdapter: PokemonAdapter
+    lateinit var my_rv:RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +40,23 @@ class MainActivity : AppCompatActivity() {
                             try{
                                 val gson= Gson()
                                 pokemons.add(gson.fromJson(response.toString(),Pokemon::class.java))
-                                Log.d(LogNames.customLog,pokemons[0].types[0].type.name)
+                                if(i == pokeInfo.results.size -1){
+
+                                    //Log.i(LogNames.customLog,"yes")
+                                    my_rv = findViewById(R.id.my_rv)
+                                    gridLayoutManager = GridLayoutManager(this,4)
+                                    pokemonAdapter = PokemonAdapter(pokemons){
+
+                                    }
+                                    my_rv.apply {
+                                        setHasFixedSize(true)
+                                        layoutManager = gridLayoutManager
+                                        adapter = pokemonAdapter
+                                    }
+
+                                }
+                                else{ }
+                                //Log.d(LogNames.customLog,pokemons[0].types[0].type.name)
                             }
                             catch (e:Exception){
                                 Log.e(LogNames.customError,e.toString())
@@ -48,13 +70,16 @@ class MainActivity : AppCompatActivity() {
                     })
                     queue.add(pokeRequest)
                 }
+
             }
 
             },Response.ErrorListener {
                 Log.e(LogNames.customError,it.toString())
             })
             queue.add(request)
+
         }
+
 
     }
 
