@@ -15,7 +15,7 @@ class NetworkUtils(private val BASE_URL: String = "https://pokeapi.co/api/v2/pok
             val uri = Uri.parse(this.BASE_URL)
                 .buildUpon()
                 .appendQueryParameter("limit","20")
-                .appendQueryParameter("offset","1")
+                .appendQueryParameter("offset","0")
             .build()
             URL(uri.toString())
         }

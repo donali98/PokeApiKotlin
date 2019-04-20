@@ -13,6 +13,7 @@ import com.example.pokeapi.Pokemon.Pokemon
 import com.example.pokeapi.Utilities.LogNames
 import com.example.pokeapi.Utilities.NetworkUtils
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,12 +40,14 @@ class MainActivity : AppCompatActivity() {
                             //Log.d(LogNames.customLog,response.toString())
                             try{
                                 val gson= Gson()
-                                pokemons.add(gson.fromJson(response.toString(),Pokemon::class.java))
+                                val pokemon = gson.fromJson(response.toString(),Pokemon::class.java)
+
+                                pokemons.add(pokemon)
                                 if(i == pokeInfo.results.size -1){
 
                                     //Log.i(LogNames.customLog,"yes")
                                     my_rv = findViewById(R.id.my_rv)
-                                    gridLayoutManager = GridLayoutManager(this,4)
+                                    gridLayoutManager = GridLayoutManager(this,3)
                                     pokemonAdapter = PokemonAdapter(pokemons){
 
                                     }

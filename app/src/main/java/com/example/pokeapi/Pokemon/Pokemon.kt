@@ -1,4 +1,4 @@
 package com.example.pokeapi.Pokemon
 
-class Pokemon(var name:String,var types:ArrayList<TypeInfo>) {
+class Pokemon(var name:String,var types:ArrayList<TypeInfo>,var sprites:Sprites) {
 }
