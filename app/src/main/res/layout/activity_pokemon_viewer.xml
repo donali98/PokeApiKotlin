@@ -3,13 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <fragment
-        android:name="com.example.pokeapi.PokemonListFragment"
-        android:id="@+id/rvListContainer"
+    tools:context=".PokemonViewer">
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </LinearLayout>
